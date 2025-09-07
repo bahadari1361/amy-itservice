@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMY-IT Service | Ihr Technikhelfer für Zuhause</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-dark: rgba(15, 23, 42, 0.7);
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header with modern glass effect */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(37, 99, 235, 0.2) 0%, transparent 30%),
+                radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 50% 80%, rgba(100, 116, 139, 0.1) 0%, transparent 30%);
+            z-index: -2;
+        }
+        
+        .logo {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            background: linear-gradient(to right, #60a5fa, var(--primary), #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .tagline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 30px;
+            color: #cbd5e1;
+            font-weight: 300;
+            max-width: 700px;
+        }
+        
+        .header-content {
+            background: var(--glass-dark);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 25px 0;
+            font-size: 1.1rem;
+        }
+        
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--glass-dark);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 15px 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #60a5fa;
+        }
+        
+        /* Section styles */
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            margin-bottom: 60px;
+            color: var(--light);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+        
+        /* About section */
+        .about-content {
+            background: var(--glass-dark);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        /* Services section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .service-card {
+            background: var(--glass-dark);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-color: rgba(96, 165, 250, 0.3);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--light);
+            text-align: center;
+        }
+        
+        .service-list {
+            list-style-type: none;
+            margin-top: auto;
+        }
+        
+        .service-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .service-list li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+        
+        /* Benefits section */
+        .benefits {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .benefits-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--glass-dark);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+        }
+        
+        .benefit-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        /* CTA section */
+        .cta-section {
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            margin-bottom: 30px;
+            color: var(--light);
+        }
+        
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #cbd5e1;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #60a5fa, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-contact {
+            margin: 30px 0;
+        }
+        
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .about-content, .benefits-content {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .header-content {
+                padding: 30px 20px;
+            }
+            
+            .service-card {
+                padding: 25px;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+        }
+        
+        /* Animation utilities */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <nav>
+            <div class="nav-logo">AMY-IT</div>
+            <div class="nav-links">
+                <a href="#about">Über uns</a>
+                <a href="#services">Leistungen</a>
+                <a href="#benefits">Vorteile</a>
+                <a href="#contact">Kontakt</a>
+            </div>
+        </nav>
+    </div>
+    
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content fade-in">
+            <h1 class="logo">AMY-IT SERVICE</h1>
+            <p class="tagline">Ihr Technikhelfer für Zuhause</p>
+            
+            <div class="contact-info">
+                <div><i class="fas fa-map-marker-alt"></i> Schönebecker Str. 28759 Bremen</div>
+                <div><i class="fas fa-phone"></i> (+49) 17626836133</div>
+            </div>
+            
+            <a href="#contact" class="cta-button">Kostenlose Beratung anfordern</a>
+        </div>
+    </header>
+    
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title fade-in">Über AMY-IT SERVICE</h2>
+            <div class="about-content fade-in">
+                <p>AMY steht für Angenehme Moderne Your-Technologie. Unser Service bringt zertifizierte IT-Expertise direkt zu Ihnen nach Hause. Wir machen Technik einfach und sorgen für Ihren entspannten Alltag.</p>
+                <p>Mit jahrelanger Erfahrung und modernsten Lösungen sind wir Ihr zuverlässiger Partner für alle IT-Herausforderungen in Ihrem Zuhause.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title fade-in">Meine Leistungen</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">🔧</div>
+                    <h3 class="service-title">Computer- & Laptop-Hilfe</h3>
+                    <ul class="service-list">
+                        <li>Langsame oder defekte PCs reparieren</li>
+                        <li>Viren- & Malware-Entfernung</li>
+                        <li>Software-Installation & Updates</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">🌐</div>
+                    <h3 class="service-title">Internet- & WLAN-Einrichtung</h3>
+                    <ul class="service-list">
+                        <li>Router einrichten & konfigurieren</li>
+                        <li>Schwaches WLAN-Signal verbessern</li>
+                        <li>Smart-Home-Geräte einbinden</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">🖨️</div>
+                    <h3 class="service-title">Geräte & Drucker</h3>
+                    <ul class="service-list">
+                        <li>Drucker einrichten & Probleme beheben</li>
+                        <li>Smartphones, Tablets & Fernseher anschließen</li>
+                        <li>Datenübertragung zwischen Geräten</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">Sicherheit & Datensicherung</h3>
+                    <ul class="service-list">
+                        <li>Schutz Ihrer persönlichen Daten</li>
+                        <li>Backup- & Wiederherstellungslösungen</li>
+                        <li>Internetschutz für Kinder</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">📱</div>
+                    <h3 class="service-title">Kinderschutz auf Smartphones</h3>
+                    <ul class="service-list">
+                        <li>Kindersicherung auf Handys & Tablets einrichten</li>
+                        <li>Bildschirmzeit & App-Nutzung begrenzen</li>
+                        <li>Kinder sicher im Internet begleiten</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">📹</div>
+                    <h3 class="service-title">CCTV-Installation & Support</h3>
+                    <ul class="service-list">
+                        <li>Überwachungskameras für Zuhause</li>
+                        <li>Fernzugriff über Smartphone</li>
+                        <li>Wartung & Problemlösung</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="benefits" class="benefits">
+        <div class="container">
+            <h2 class="section-title fade-in">Ihre Vorteile</h2>
+            <div class="benefits-content fade-in">
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-home"></i></div>
+                        <div>Persönlicher und zuverlässiger IT-Service direkt bei Ihnen zu Hause</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <div>Flexible Terminvereinbarung nach Ihren Bedürfnissen</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-euro-sign"></i></div>
+                        <div>Transparente und faire Preisgestaltung ohne versteckte Kosten</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-clock"></i></div>
+                        <div>Schnelle und kompetente Unterstützung auch in Notfällen</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-certificate"></i></div>
+                        <div>Zertifizierte Expertise für maximale Sicherheit</div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div>Modernste Technologien für Ihr Zuhause</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-content fade-in">
+                <h2 class="cta-title">Bereit für stressfreie Technik?</h2>
+                <p class="cta-text">Kontaktieren Sie uns noch heute für eine kostenlose Erstberatung und ein unverbindliches Angebot.</p>
+                <a href="#" class="cta-button">Jetzt Termin vereinbaren</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">AMY-IT SERVICE</div>
+                <p>Ihr Technikhelfer für Zuhause</p>
+                
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> Schönebecker Str. 28759 Bremen</p>
+                    <p><i class="fas fa-phone"></i> (+49) 17626836133</p>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>© 2023 AMY-IT Service. Alle Rechte vorbehalten.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fade-in animation for elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                fadeInObserver.observe(element);
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
